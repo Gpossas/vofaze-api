@@ -37,7 +37,7 @@ model Client {
   cpf       String   @unique
   phone     String   @unique
   password  String
-  url_image String?
+  url_img  String?
   addressId String
   address   Address  @relation(fields: [addressId], references: [id])
   createdAt DateTime @default(now())

@@ -6,15 +6,18 @@ import { Provider } from 'src/provider/entities/provider.entity';
 import { ProviderService } from 'src/provider/provider.service';
 import { UserPayload } from './models/UserPayload';
 import { UserToken } from './models/UserToken';
+import { Client } from 'src/client/entities/client.entity';
+import { ClientService } from 'src/client/client.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
     private readonly providerService: ProviderService,
+    private readonly clientService: ClientService,
   ) {}
 
-  async login(user: Provider): Promise<UserToken> {
+  async login(user: Provider | Client): Promise<UserToken> {
     const payload: UserPayload = {
       sub: user.id,
       email: user.email,
@@ -27,7 +30,10 @@ export class AuthService {
     };
   }
 
-  async validateUser(email: string, password: string): Promise<Provider> {
+  async validateUser(
+    email: string,
+    password: string,
+  ): Promise<Provider | Client> {
     const user = await this.providerService.findByEmail(email);
 
     if (user) {
