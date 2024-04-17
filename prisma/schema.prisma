@@ -68,11 +68,15 @@ model Address {
 }
 
 model Company {
-  id             String @id @default(cuid())
-  background_img String
+  id             String  @id @default(cuid())
+  company_name   String
+  url_img        String
+  background_img String?
+  description    String?
 
-  provider   Provider @relation(fields: [providerId], references: [id])
-  providerId String   @unique
+  provider   Provider    @relation(fields: [providerId], references: [id])
+  providerId String       @unique
+  assessment Assessment[]
 
   employee Employee[]
 }
@@ -132,8 +136,10 @@ model Assessment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  client    Client  @relation(fields: [clientId], references: [id])
+  client    Client   @relation(fields: [clientId], references: [id])
   clientId  String
-  service   Service @relation(fields: [serviceId], references: [id])
+  service   Service  @relation(fields: [serviceId], references: [id])
   serviceId String
+  Company   Company? @relation(fields: [companyId], references: [id])
+  companyId String?
 }
