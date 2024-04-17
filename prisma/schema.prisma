@@ -138,8 +138,8 @@ model Assessment {
 
   client    Client   @relation(fields: [clientId], references: [id])
   clientId  String
-  service   Service  @relation(fields: [serviceId], references: [id])
-  serviceId String
+  service   Service?  @relation(fields: [serviceId], references: [id])
+  serviceId String?
   Company   Company? @relation(fields: [companyId], references: [id])
   companyId String?
 }
