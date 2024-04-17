@@ -19,10 +19,14 @@ model Provider {
   password  String
   url_image String?
   type      ProviderType
-  addressId String
-  address   Address      @relation(fields: [addressId], references: [id])
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
+
+  service Service[]
+  company Company?
+
+  addressId String
+  address   Address @relation(fields: [addressId], references: [id])
 }
 
 enum ProviderType {
@@ -31,17 +35,23 @@ enum ProviderType {
 }
 
 model Client {
-  id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  cpf       String   @unique
-  phone     String   @unique
-  password  String
+  id String @id @default(cuid())
+
+  name     String
+  email    String  @unique
+  cpf      String  @unique
+  phone    String  @unique
+  password String
   url_img  String?
-  addressId String
-  address   Address  @relation(fields: [addressId], references: [id])
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  schedule   Schedule[]
+  assessment Assessment[]
+
+  addressId String
+  address   Address @relation(fields: [addressId], references: [id])
 }
 
 model Address {
@@ -53,6 +63,77 @@ model Address {
   country   String
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  Client    Client[]
-  Provider  Provider[]
+  client    Client[]
+  provider  Provider[]
+}
+
+model Company {
+  id             String @id @default(cuid())
+  background_img String
+
+  provider   Provider @relation(fields: [providerId], references: [id])
+  providerId String   @unique
+
+  employee Employee[]
+}
+
+model Employee {
+  id          String  @id @default(cuid())
+  name        String
+  phone       String  @unique
+  url_img     String?
+  description String?
+
+  service   Service[]
+  company   Company   @relation(fields: [companyId], references: [id])
+  companyId String
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  url_img     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  Provider   Provider     @relation(fields: [providerId], references: [id])
+  providerId String
+  employee   Employee     @relation(fields: [employeeId], references: [id])
+  employeeId String
+  schedule   Schedule[]
+  assessment Assessment[]
+}
+
+model Schedule {
+  id        String         @id @default(cuid())
+  date      DateTime
+  status    ScheduleStatus
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  client    Client  @relation(fields: [clientId], references: [id])
+  clientId  String
+  service   Service @relation(fields: [serviceId], references: [id])
+  serviceId String
+}
+
+enum ScheduleStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+model Assessment {
+  id        String   @id @default(cuid())
+  note      Float
+  comment   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  client    Client  @relation(fields: [clientId], references: [id])
+  clientId  String
+  service   Service @relation(fields: [serviceId], references: [id])
+  serviceId String
 }
