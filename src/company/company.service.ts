@@ -22,7 +22,7 @@ export class CompanyService {
   }
 
   async getCompany(company_id: string) {
-    await this.companyMiddleware.companyExists(company_id);
+    await this.companyMiddleware.companyExists(String(company_id));
     // If no company_id is provided, return all companies
     if (!company_id) {
       return this.prisma.company.findMany();

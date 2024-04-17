@@ -42,6 +42,7 @@ export class CompanyController {
 
   @Delete()
   async deleteCompany(@Query('company_id') company_id: string) {
-    return this.companyService.deleteCompany(company_id);
+    const response = this.companyService.deleteCompany(company_id);
+    return { response, message: 'Company deleted' };
   }
 }
