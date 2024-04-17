@@ -22,8 +22,8 @@ model Provider {
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
 
-  service Service[]
-  company Company?
+  service  Service[]
+  company  Company?
 
   addressId String
   address   Address @relation(fields: [addressId], references: [id])
@@ -88,9 +88,9 @@ model Employee {
   url_img     String?
   description String?
 
-  service   Service[]
-  company   Company   @relation(fields: [companyId], references: [id])
-  companyId String
+  service    Service[]
+  company    Company   @relation(fields: [companyId], references: [id])
+  companyId  String
 }
 
 model Service {

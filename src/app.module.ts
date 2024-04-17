@@ -6,9 +6,10 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ProviderModule } from './provider/provider.module';
 import { ClientModule } from './client/client.module';
 import { CompanyModule } from './company/company.module';
+import { EmployeeModule } from './employee/employee.module';
 
 @Module({
-  imports: [PrismaModule, ProviderModule, AuthModule, ClientModule, CompanyModule],
+  imports: [PrismaModule, ProviderModule, AuthModule, ClientModule, CompanyModule, EmployeeModule],
   providers: [
     {
       provide: APP_GUARD,
