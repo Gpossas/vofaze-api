@@ -9,7 +9,14 @@ import { CompanyModule } from './company/company.module';
 import { EmployeeModule } from './employee/employee.module';
 
 @Module({
-  imports: [PrismaModule, ProviderModule, AuthModule, ClientModule, CompanyModule, EmployeeModule],
+  imports: [
+    PrismaModule,
+    ProviderModule,
+    AuthModule,
+    ClientModule,
+    CompanyModule,
+    EmployeeModule,
+  ],
   providers: [
     {
       provide: APP_GUARD,
