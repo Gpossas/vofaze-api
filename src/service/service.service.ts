@@ -20,19 +20,30 @@ export class ServiceService {
     });
   }
 
-  findAll() {
-    return `This action returns all service`;
+  async find(search: string) {
+    return this.prisma.service.findMany({
+      where: {
+        name: {
+          contains: search,
+        },
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} service`;
+  async update(updateServiceDto: UpdateServiceDto, service_id: string) {
+    return this.prisma.service.update({
+      where: {
+        id: service_id,
+      },
+      data: updateServiceDto,
+    });
   }
 
-  update(id: number, updateServiceDto: UpdateServiceDto) {
-    return `This action updates a #${id} service`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} service`;
+  async delete(service_id: string) {
+    return this.prisma.service.delete({
+      where: {
+        id: service_id,
+      },
+    });
   }
 }

@@ -4,7 +4,6 @@ import {
   Post,
   Body,
   Patch,
-  Param,
   Delete,
   Query,
 } from '@nestjs/common';
@@ -25,22 +24,20 @@ export class ServiceController {
   }
 
   @Get()
-  findAll() {
-    return this.serviceService.findAll();
+  find(@Query('search') search: string) {
+    return this.serviceService.find(search);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.serviceService.findOne(+id);
+  @Patch()
+  update(
+    @Body() updateServiceDto: UpdateServiceDto,
+    @Query('service_id') service_id: string,
+  ) {
+    return this.serviceService.update(updateServiceDto, service_id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateServiceDto: UpdateServiceDto) {
-    return this.serviceService.update(+id, updateServiceDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.serviceService.remove(+id);
+  @Delete()
+  delete(@Query('service_id') service_id: string) {
+    return this.serviceService.delete(service_id);
   }
 }
