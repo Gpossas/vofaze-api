@@ -6,7 +6,10 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ProviderModule } from './provider/provider.module';
 import { ClientModule } from './client/client.module';
 import { CompanyModule } from './company/company.module';
+import { ScheduleModule } from './schedule/schedule.module';
+
 import { EmployeeModule } from './employee/employee.module';
+
 
 @Module({
   imports: [
@@ -15,6 +18,7 @@ import { EmployeeModule } from './employee/employee.module';
     AuthModule,
     ClientModule,
     CompanyModule,
+    ScheduleModule,
     EmployeeModule,
   ],
   providers: [
