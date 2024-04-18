@@ -7,9 +7,9 @@ import { ProviderModule } from './provider/provider.module';
 import { ClientModule } from './client/client.module';
 import { CompanyModule } from './company/company.module';
 import { ScheduleModule } from './schedule/schedule.module';
-
 import { EmployeeModule } from './employee/employee.module';
-
+import { GoogleModule } from './google/google.module';
+import { ServiceModule } from './service/service.module';
 
 @Module({
   imports: [
@@ -20,6 +20,8 @@ import { EmployeeModule } from './employee/employee.module';
     CompanyModule,
     ScheduleModule,
     EmployeeModule,
+    GoogleModule,
+    ServiceModule,
   ],
   providers: [
     {

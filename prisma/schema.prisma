@@ -106,8 +106,8 @@ model Service {
 
   Provider   Provider     @relation(fields: [providerId], references: [id])
   providerId String
-  employee   Employee     @relation(fields: [employeeId], references: [id])
-  employeeId String
+  employee   Employee?     @relation(fields: [employeeId], references: [id])
+  employeeId String?
   schedule   Schedule[]
   assessment Assessment[]
 }
