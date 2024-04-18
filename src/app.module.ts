@@ -8,6 +8,9 @@ import { ClientModule } from './client/client.module';
 import { CompanyModule } from './company/company.module';
 import { ScheduleModule } from './schedule/schedule.module';
 
+import { EmployeeModule } from './employee/employee.module';
+
+
 @Module({
   imports: [
     PrismaModule,
@@ -16,6 +19,7 @@ import { ScheduleModule } from './schedule/schedule.module';
     ClientModule,
     CompanyModule,
     ScheduleModule,
+    EmployeeModule,
   ],
   providers: [
     {

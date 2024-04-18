@@ -24,6 +24,7 @@ model Provider {
 
   service  Service[]
   schedule Schedule[]
+
   company  Company?
 
   addressId String
@@ -89,9 +90,9 @@ model Employee {
   url_img     String?
   description String?
 
-  service   Service[]
-  company   Company   @relation(fields: [companyId], references: [id])
-  companyId String
+  service    Service[]
+  company    Company   @relation(fields: [companyId], references: [id])
+  companyId  String
 }
 
 model Service {
@@ -144,6 +145,7 @@ model Assessment {
   client    Client   @relation(fields: [clientId], references: [id])
   clientId  String
   service   Service? @relation(fields: [serviceId], references: [id])
+
   serviceId String?
   Company   Company? @relation(fields: [companyId], references: [id])
   companyId String?
